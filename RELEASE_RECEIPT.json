@@ -1,0 +1,32 @@
+{
+  "release_candidate": "neuruh-agent-receipt",
+  "version": "0.1.0",
+  "generated_at": "2026-08-04T14:33:51.357091+00:00",
+  "source_map_complete": true,
+  "ownership_review": "human_review_required",
+  "license_review": "human_review_required",
+  "secret_scan": "pass_for_generated_wave_01_package",
+  "personal_data_scan": "pass_for_generated_wave_01_package",
+  "customer_data_scan": "pass_for_generated_wave_01_package",
+  "production_endpoint_scan": "pass_for_generated_wave_01_package",
+  "proprietary_logic_review": "human_review_required",
+  "security_review": "pass_with_documented_limitations",
+  "synthetic_fixtures_only": true,
+  "tests": {
+    "status": "pending_execution_on_target_machine",
+    "count": 7
+  },
+  "documentation_smoke_test": "pass",
+  "clean_machine_install_test": "not_run",
+  "publication_status": "blocked_until_human_approval",
+  "private_components_excluded": [
+    "production trust configuration",
+    "policy thresholds and scoring",
+    "private identities and source SHAs",
+    "production paths and endpoints",
+    "real receipt ledgers",
+    "AXON mutation executor",
+    "AEGIS/IAR routing intelligence",
+    "vertical decision systems"
+  ]
+}

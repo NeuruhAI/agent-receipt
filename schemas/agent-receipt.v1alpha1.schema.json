@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.neuruh.com/agent-receipt/v1alpha1.json",
+  "title": "Neuruh Agent Receipt v1alpha1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "seq",
+    "receipt_type",
+    "authority",
+    "observed_at",
+    "subject",
+    "correlation_id",
+    "causation_id",
+    "payload",
+    "prev_hash",
+    "entry_hash"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "neuruh.agent-receipt.v1alpha1"
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "receipt_type": {
+      "enum": [
+        "decision",
+        "execution",
+        "observation",
+        "outcome"
+      ]
+    },
+    "authority": {
+      "enum": [
+        "governance-decision",
+        "execution-evidence",
+        "observation",
+        "outcome-evidence"
+      ]
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "subject": {
+      "type": "string",
+      "minLength": 1
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "causation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "payload": {
+      "type": "object"
+    },
+    "prev_hash": {
+      "type": "string",
+      "minLength": 1
+    },
+    "entry_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}
