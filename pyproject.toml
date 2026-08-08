@@ -9,7 +9,7 @@ description = "Portable tamper-evident receipt specification and verifier for ag
 requires-python = ">=3.10"
 authors = [{name = "Jeramie Hicks / Neuruh"}]
 readme = "README.md"
-license = {text = "LICENSE DECISION PENDING"}
+license = {text = "Apache-2.0"}
 
 [project.scripts]
 neuruh-agent-receipt = "neuruh_agent_receipt.cli:main"
