@@ -44,7 +44,9 @@ authorization, and it is not proof that the larger objective was completed.
 ```bash
 python3 -m unittest discover -s tests -v
 
-PYTHONPATH=src python3 -m neuruh_agent_receipt.cli   verify examples/valid-ledger.jsonl   --expected-tip-file examples/valid-tip.txt
+PYTHONPATH=src python3 -m neuruh_agent_receipt.cli \
+  verify examples/valid-ledger.jsonl \
+  --expected-tip-file examples/valid-tip.txt
 ```
 
 ## Authority classes
@@ -57,9 +59,20 @@ PYTHONPATH=src python3 -m neuruh_agent_receipt.cli   verify examples/valid-ledge
 The verifier refuses an `execution-evidence` receipt whose payload claims that
 it authorized an action or completed a higher-level mission.
 
-## Status
+## Release status
 
-**Active Alpha / private staging candidate.**
+**v0.1.0 — Active Alpha.**
 
-The format is intentionally narrow. It should be tested in public before
-stability claims are made.
+The format is intentionally narrow and is being released for public testing,
+interoperability experiments, and feedback. Stability is not yet guaranteed.
+
+## Security boundary
+
+This repository contains no production routing configuration, private ledgers,
+customer data, production endpoints, privileged connectors, policy thresholds,
+or autonomous execution authority. See `SECURITY.md` for the reporting and
+scope policy.
+
+## License
+
+Apache License 2.0. See `LICENSE`.
