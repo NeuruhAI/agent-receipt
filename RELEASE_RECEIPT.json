@@ -1,32 +1,41 @@
 {
   "release_candidate": "neuruh-agent-receipt",
   "version": "0.1.0",
-  "generated_at": "2026-08-04T14:33:51.357091+00:00",
+  "release_class": "A_PUBLIC_COMMONS",
+  "approved_at": "2026-08-08T08:11:00-04:00",
   "source_map_complete": true,
-  "ownership_review": "human_review_required",
-  "license_review": "human_review_required",
-  "secret_scan": "pass_for_generated_wave_01_package",
-  "personal_data_scan": "pass_for_generated_wave_01_package",
-  "customer_data_scan": "pass_for_generated_wave_01_package",
-  "production_endpoint_scan": "pass_for_generated_wave_01_package",
-  "proprietary_logic_review": "human_review_required",
+  "ownership_review": "approved_by_founder",
+  "license": "Apache-2.0",
+  "license_review": "selected_for_public_release",
+  "secret_scan": "pass",
+  "personal_data_scan": "pass",
+  "customer_data_scan": "pass",
+  "production_endpoint_scan": "pass",
+  "proprietary_logic_review": "pass_no_private_routing_domain_or_scoring_logic",
   "security_review": "pass_with_documented_limitations",
   "synthetic_fixtures_only": true,
   "tests": {
-    "status": "pending_execution_on_target_machine",
-    "count": 7
+    "status": "pass",
+    "count": 7,
+    "command": "python3 -m unittest discover -s tests -v"
   },
+  "cli_smoke_test": "pass",
   "documentation_smoke_test": "pass",
-  "clean_machine_install_test": "not_run",
-  "publication_status": "blocked_until_human_approval",
+  "clean_machine_package_install_test": "blocked_by_execution_environment_package_index_not_code_failure",
+  "publication_status": "approved_for_public_release",
+  "repository_visibility": "pending_public_visibility_change",
   "private_components_excluded": [
     "production trust configuration",
-    "policy thresholds and scoring",
-    "private identities and source SHAs",
+    "private identities and production source references",
     "production paths and endpoints",
     "real receipt ledgers",
-    "AXON mutation executor",
-    "AEGIS/IAR routing intelligence",
-    "vertical decision systems"
+    "private execution and routing systems",
+    "vertical decision and scoring systems"
+  ],
+  "known_limitations": [
+    "alpha schema may change",
+    "hash chaining is tamper evidence, not digital signature or identity proof",
+    "execution evidence does not grant authority",
+    "the package does not execute or authorize agents"
   ]
 }
