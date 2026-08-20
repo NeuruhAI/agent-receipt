@@ -19,4 +19,9 @@ __all__ = [
     "verify_ledger",
 ]
 
-__version__ = "0.1.0"
+from importlib.metadata import PackageNotFoundError, version as _metadata_version
+
+try:
+    __version__ = _metadata_version("neuruh-agent-receipt")
+except PackageNotFoundError:  # running from a source tree that was never installed
+    __version__ = "unknown"

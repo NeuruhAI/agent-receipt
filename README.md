@@ -17,7 +17,7 @@ pip install .
 Or install a pinned release directly:
 
 ```bash
-pip install "neuruh-agent-receipt @ git+https://github.com/NeuruhAI/agent-receipt.git@v0.1.1-alpha"
+pip install "neuruh-agent-receipt @ git+https://github.com/NeuruhAI/agent-receipt.git@v0.1.2-alpha"
 ```
 
 ## Verify a ledger
