@@ -1,5 +1,7 @@
 # Neuruh Agent Receipt
 
+[![ci](https://github.com/NeuruhAI/agent-receipt/actions/workflows/ci.yml/badge.svg)](https://github.com/NeuruhAI/agent-receipt/actions/workflows/ci.yml)
+
 A dependency-free specification and verifier for portable, tamper-evident agent receipts.
 
 An agent receipt records one observation about a run. Hash chaining makes insertion, reordering, broken links, and optional tail truncation detectable.
