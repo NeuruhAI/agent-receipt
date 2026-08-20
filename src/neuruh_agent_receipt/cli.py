@@ -37,9 +37,9 @@ def main(argv: list[str] | None = None) -> int:
                     file=sys.stderr,
                 )
                 return 2
-            expected_tip = Path(args.expected_tip_file).read_text(
-                encoding="utf-8"
-            ).strip()
+            expected_tip = (
+                Path(args.expected_tip_file).read_text(encoding="utf-8").strip()
+            )
 
         try:
             entries = load_jsonl(args.ledger)

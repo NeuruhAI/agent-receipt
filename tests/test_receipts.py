@@ -1,21 +1,18 @@
 from __future__ import annotations
 
 import copy
-import json
-import sys
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
-
-from neuruh_agent_receipt.ledger import (  # noqa: E402
+from neuruh_agent_receipt.ledger import (
     GENESIS,
     ReceiptValidationError,
     load_jsonl,
     seal_entry,
     verify_ledger,
 )
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 class ReceiptTests(unittest.TestCase):
@@ -65,9 +62,7 @@ class ReceiptTests(unittest.TestCase):
             verify_ledger(truncated, expected_tip=self.tip)
 
     def test_execution_cannot_claim_authorization(self) -> None:
-        entries = load_jsonl(
-            ROOT / "examples" / "false-authority-ledger.jsonl"
-        )
+        entries = load_jsonl(ROOT / "examples" / "false-authority-ledger.jsonl")
         with self.assertRaisesRegex(
             ReceiptValidationError,
             "cannot upgrade itself",

@@ -4,18 +4,26 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "neuruh-agent-receipt"
-version = "0.1.0"
+version = "0.1.1a0"
 description = "Portable tamper-evident receipt specification and verifier for agent systems"
 requires-python = ">=3.10"
 authors = [{name = "Jeramie Hicks / Neuruh"}]
 readme = "README.md"
-license = {text = "Apache-2.0"}
+license = "Apache-2.0"
+license-files = ["LICENSE"]
 
 [project.scripts]
 neuruh-agent-receipt = "neuruh_agent_receipt.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/NeuruhAI/agent-receipt"
+Repository = "https://github.com/NeuruhAI/agent-receipt"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.data-files]
+"share/neuruh-agent-receipt/schemas" = ["schemas/*.json"]

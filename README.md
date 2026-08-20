@@ -1,78 +1,67 @@
 # Neuruh Agent Receipt
 
-A small, dependency-free specification and verifier for portable,
-tamper-evident agent receipts.
+A dependency-free specification and verifier for portable, tamper-evident agent receipts.
 
-## Problem
+An agent receipt records one observation about a run. Hash chaining makes insertion, reordering, broken links, and optional tail truncation detectable.
 
-Agent systems often blur four different claims:
-
-1. A request existed.
-2. A governance decision was issued.
-3. Execution occurred.
-4. The mission or business outcome succeeded.
-
-Those claims are not interchangeable.
-
-An execution receipt is evidence that an operation occurred. It is not
-authorization, and it is not proof that the larger objective was completed.
-
-## What this package provides
-
-- A canonical receipt envelope
-- Append-only SHA-256 hash-chain verification
-- Sequence, insertion, reorder, and broken-link detection
-- Optional external-tip verification for tail truncation
-- Explicit authority classes
-- Synthetic examples
-- A dependency-free command-line verifier
-- A standard-library test suite
-
-## What it does not provide
-
-- A policy engine
-- Production authorization
-- Agent execution
-- Identity verification
-- Cryptographic signatures
-- Key management
-- A database
-- Proof that a real-world outcome occurred
-
-## Quick start
+## Install
 
 ```bash
-python3 -m unittest discover -s tests -v
+git clone https://github.com/NeuruhAI/agent-receipt.git
+cd agent-receipt
+python -m venv .venv
+source .venv/bin/activate
+pip install .
+```
 
-PYTHONPATH=src python3 -m neuruh_agent_receipt.cli \
-  verify examples/valid-ledger.jsonl \
+Or install a pinned release directly:
+
+```bash
+pip install "neuruh-agent-receipt @ git+https://github.com/NeuruhAI/agent-receipt.git@v0.1.1-alpha"
+```
+
+## Verify a ledger
+
+```bash
+neuruh-agent-receipt verify examples/valid-ledger.jsonl \
   --expected-tip-file examples/valid-tip.txt
 ```
 
-## Authority classes
+Expected output:
 
-- `governance-decision`
-- `execution-evidence`
-- `observation`
-- `outcome-evidence`
+```text
+PASS: 3 receipts
+TIP: 63a5bea04a74c7fb5dc52e71483a71eaa7bf1b6c8243444a9cc66904843f2eb3
+```
 
-The verifier refuses an `execution-evidence` receipt whose payload claims that
-it authorized an action or completed a higher-level mission.
+The verifier exits nonzero for malformed receipts, invalid authority claims, sequence gaps, changed entries, broken links, or a ledger tip that does not match the separately stored expected tip. The repository ships `examples/tampered-ledger.jsonl` and `examples/false-authority-ledger.jsonl` so both failure paths can be reproduced.
 
-## Release status
+Receipt authority classes are `governance-decision`, `execution-evidence`, `observation`, and `outcome-evidence`. The verifier rejects an execution receipt that claims it authorized an action or completed the higher-level mission.
 
-**v0.1.0 — Active Alpha.**
+## API
 
-The format is intentionally narrow and is being released for public testing,
-interoperability experiments, and feedback. Stability is not yet guaranteed.
+| Name | Purpose |
+| --- | --- |
+| `GENESIS` | `NEURUH_AGENT_RECEIPT_GENESIS_V1`, the previous-hash value of entry 0. |
+| `seal_entry(entry, *, prev_hash, seq)` | Return the entry with its sequence, link, and `entry_hash`. |
+| `entry_hash(entry_without_hash)` | Digest over the canonical entry body. |
+| `verify_entry(entry, *, expected_seq, expected_prev_hash)` | Check one entry; raises on failure. |
+| `verify_ledger(entries, *, expected_tip=None)` | Check a whole chain; returns a `LedgerVerification`. |
+| `canonical_json(value)`, `sha256_hex(value)` | Deterministic serialization and hashing helpers. |
+| `ReceiptValidationError` | Raised for every rejection. |
 
-## Security boundary
+## Test
 
-This repository contains no production routing configuration, private ledgers,
-customer data, production endpoints, privileged connectors, policy thresholds,
-or autonomous execution authority. See `SECURITY.md` for the reporting and
-scope policy.
+```bash
+python -m unittest discover -s tests -v
+```
+
+## Safety boundary
+
+Receipts are evidence, not authorization, identity proof, cryptographic signatures, or proof of a real-world outcome. Hash chaining detects tampering by someone who cannot rewrite the whole ledger and the separately stored tip; it does not prove who wrote an entry. Storing the expected tip somewhere the ledger writer cannot reach is what makes tail truncation detectable.
+
+See [`docs/EVIDENCE_IS_NOT_AUTHORITY.md`](docs/EVIDENCE_IS_NOT_AUTHORITY.md) and the [Neuruh Public Commons boundary](https://github.com/NeuruhAI/public-commons/blob/main/PUBLIC_PRIVATE_BOUNDARY.md).
 
 ## License
 
-Apache License 2.0. See `LICENSE`.
+Apache License 2.0. See [`LICENSE`](LICENSE).
